@@ -26,40 +26,25 @@ A simple blog application built with Ruby on Rails. This app allows users to cre
    ```sh
    bundle install
    ```
-3. Set up the database:
+3. Set up environment variables:
    
-   Edit `config/database.yml` to configure your PostgreSQL credentials. Example:
-   ```yaml
-   default: &default
-     adapter: postgresql
-     encoding: unicode
-     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-     username: your_postgres_user
-     password: your_postgres_password
-     host: localhost
-   development:
-     <<: *default
-     database: blog_app_development
-   test:
-     <<: *default
-     database: blog_app_test
-   production:
-     <<: *default
-     database: blog_app_production
-     username: <%= ENV["POSTGRES_USER"] %>
-     password: <%= ENV["POSTGRES_PASSWORD"] %>
-     host: <%= ENV["POSTGRES_HOST"] %>
+   Copy the sample environment file and edit it with your configuration:
+   ```sh
+   cp .env.sample .env
+   # Then edit .env to set your database and secret key values
    ```
    
-   Then run:
+   The application uses environment variables for database configuration and secrets. See `.env.sample` for all available variables.
+
+4. Set up the database:
    ```sh
    rails db:create db:migrate
    ```
-4. Start the Rails server:
+5. Start the Rails server:
    ```sh
    rails server
    ```
-5. Visit `http://localhost:3000/posts` to use the blog.
+6. Visit `http://localhost:3000/posts` to use the blog.
 
 ## Usage
 - Create, edit, and delete posts from the web interface.
