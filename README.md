@@ -1,24 +1,73 @@
-# README
+# BlogApp
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple blog application built with Ruby on Rails. This app allows users to create, read, update, and delete blog posts.
 
-Things you may want to cover:
+## Features
+- List all blog posts
+- View a single post
+- Create a new post
+- Edit an existing post
+- Delete a post
 
-* Ruby version
+## Getting Started
 
-* System dependencies
+### Prerequisites
+- Ruby (version 3.0 or higher recommended)
+- Rails (version 7 or higher recommended)
+- PostgreSQL (for development and production)
 
-* Configuration
+### Setup
+1. Clone the repository:
+   ```sh
+   git clone <your-repo-url>
+   cd blog_app
+   ```
+2. Install dependencies:
+   ```sh
+   bundle install
+   ```
+3. Set up the database:
+   
+   Edit `config/database.yml` to configure your PostgreSQL credentials. Example:
+   ```yaml
+   default: &default
+     adapter: postgresql
+     encoding: unicode
+     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+     username: your_postgres_user
+     password: your_postgres_password
+     host: localhost
+   development:
+     <<: *default
+     database: blog_app_development
+   test:
+     <<: *default
+     database: blog_app_test
+   production:
+     <<: *default
+     database: blog_app_production
+     username: <%= ENV["POSTGRES_USER"] %>
+     password: <%= ENV["POSTGRES_PASSWORD"] %>
+     host: <%= ENV["POSTGRES_HOST"] %>
+   ```
+   
+   Then run:
+   ```sh
+   rails db:create db:migrate
+   ```
+4. Start the Rails server:
+   ```sh
+   rails server
+   ```
+5. Visit `http://localhost:3000/posts` to use the blog.
 
-* Database creation
+## Usage
+- Create, edit, and delete posts from the web interface.
 
-* Database initialization
+## Project Structure
+- `app/models/post.rb` - The Post model
+- `app/controllers/posts_controller.rb` - Controller for blog posts
+- `app/views/posts/` - Views for posts CRUD
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## License
+This project is open source and available under the [MIT License](LICENSE).
