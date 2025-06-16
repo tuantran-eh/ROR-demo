@@ -64,6 +64,22 @@ A simple blog application built with Ruby on Rails. This app allows users to cre
 ## Usage
 - Create, edit, and delete posts from the web interface.
 
+## API Endpoints
+
+You can access JSON responses from the Posts controller by appending `.json` to the URL:
+
+- `GET /posts.json` – List all posts in JSON format
+- `GET /posts/:id.json` – Show a single post in JSON format
+- `POST /posts.json` – Create a new post (send JSON body)
+- `PATCH /posts/:id.json` – Update a post (send JSON body)
+- `DELETE /posts/:id.json` – Delete a post
+
+Example:
+
+```sh
+curl http://localhost:3000/posts.json
+```
+
 ## Project Structure
 - `app/models/post.rb` - The Post model
 - `app/controllers/posts_controller.rb` - Controller for blog posts
