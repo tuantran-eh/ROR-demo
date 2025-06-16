@@ -9,11 +9,11 @@ default: &default
 
 development:
   <<: *default
-    database: <%= ENV.fetch("POSTGRES_DB", "blog_app_development") %>
+  database: <%= ENV.fetch("POSTGRES_DB", "blog_app_development") %>
 
 test:
   <<: *default
-    database: <%= ENV.fetch("POSTGRES_DB", "blog_app_test") %>
+  database: <%= ENV.fetch("POSTGRES_DB", "blog_app_test") %>
 
 production:
   <<: *default

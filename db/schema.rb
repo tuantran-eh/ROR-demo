@@ -19,5 +19,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_16_040139) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "created_by_id"
+    t.index ["created_by_id"], name: "index_posts_on_created_by_id"
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "role", default: "user", null: false
+    t.string "password_digest"
+    t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  add_foreign_key "posts", "users", column: "created_by_id"
 end

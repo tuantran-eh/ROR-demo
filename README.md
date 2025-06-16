@@ -40,11 +40,20 @@ A simple blog application built with Ruby on Rails. This app allows users to cre
    ```sh
    rails db:create db:migrate
    ```
-5. Start the Rails server:
+5. Seed the database with an admin account:
+   ```sh
+   rails db:seed
+   ```
+   This will create an admin user with:
+   - Email: admin@example.com
+   - Password: password (encrypted using bcrypt)
+   - Role: admin
+
+6. Start the Rails server:
    ```sh
    rails server
    ```
-6. Visit `http://localhost:3000/posts` to use the blog.
+7. Visit `http://localhost:3000/posts` to use the blog.
 
 ## Usage
 - Create, edit, and delete posts from the web interface.
