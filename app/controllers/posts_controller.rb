@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  include Pundit
+  include Pundit::Authorization
   before_action :set_post, only: %i[ show edit update destroy ]
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
@@ -33,6 +33,7 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
+    @post.created_by = current_user
     authorize @post
     respond_to do |format|
       if @post.save

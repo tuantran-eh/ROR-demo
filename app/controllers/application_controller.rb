@@ -4,8 +4,11 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_with_token, if: :api_request?
 
-  rescue_from Pundit::NotAuthorizedError do
-    redirect_to '/login'
+  rescue_from Pundit::NotAuthorizedError do |exception|
+    respond_to do |format|
+      format.html { redirect_to '/login' }
+      format.json { render json: { error: 'Forbidden' }, status: :forbidden }
+    end
   end
 
   private
@@ -29,7 +32,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    if api_request?
+      @current_user
+    else
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    end
   end
 
   def not_found

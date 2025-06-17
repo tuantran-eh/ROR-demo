@@ -8,11 +8,11 @@ class PostPolicy < ApplicationPolicy
   end
 
   def update?
-    admin_or(-> { user.present? && user.id == record.user_id })
+    admin_or(-> { user.present? && user.id == record.created_by_id })
   end
 
   def destroy?
-    admin_or(-> { user.present? && user.id == record.user_id })
+    admin_or(-> { user.present? && user.id == record.created_by_id })
   end
 
   class Scope < Scope
